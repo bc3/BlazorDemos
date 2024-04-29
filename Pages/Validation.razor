@@ -1,0 +1,9 @@
+@page "/Validation"
+<h3>Validation</h3>
+
+<EditForm Model="anyModelInstance" OnValidSubmit="Callback">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <InputText @bind-Value="anyModelInstance.Name"></InputText>
+    <ValidationMessage For="@(() => anyModelInstance.Name)"></ValidationMessage>
+    <button type="submit">Submit</button>
+</EditForm>

@@ -1,0 +1,58 @@
+@page "/dropdownsample"
+@using Radzen.Blazor
+
+<h3>Radzen Dropdown Sample</h3>
+
+<RadzenDropDown 
+    TValue="IEnumerable<string>"
+    @bind-Value="@selectedItem"
+    AllowClear="true"
+    AllowFiltering="true"
+    Multiple="true"
+    Data="@items"
+    @ref="ddlMultiple"
+>
+</RadzenDropDown>
+
+
+<RadzenDropDown 
+    TValue="string"
+    @bind-Value="@selectedItemSingle"
+    AllowClear="true"
+    AllowFiltering="true"
+    Data="@items"
+    @ref="ddlSingle"
+>
+</RadzenDropDown>
+
+
+<Button @onclick="Clear">Clear</Button>
+
+<p>You selected multiple: @selectedItem</p>
+<p>You selected single: @selectedItemSingle</p>
+
+@code {
+    IEnumerable<string> selectedItem;
+     string selectedItemSingle;
+    
+     IEnumerable<string> items;
+    
+    RadzenDropDown<IEnumerable<string>> ddlMultiple;
+    RadzenDropDown<string> ddlSingle;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        items =new List<string>() { "Item 1", "Item 2", "Item 3" };
+    }
+    
+    private void Clear()
+    {
+        // selectedItem = null;
+        // selectedItemSingle = null;
+        ddlSingle.Reset();
+        ddlMultiple.Reset();
+    }
+        
+}

@@ -1,0 +1,84 @@
+@page "/Map"
+<h3>Map</h3>
+@using LeafletForBlazor
+
+
+@code{
+    private RealTimeMap? _map;
+    private RealTimeMap.LoadParameters _parameters = new();
+    private RealTimeMap.MapOptions _options = new();
+    
+    private double MapLatitude { get; set; } = 50.434d;
+    private double MapLongitude { get; set; } = 4.4d;
+    private int MapZoomFactor { get; set; } = 7;
+
+    private bool first = false;
+
+    protected override Task OnInitializedAsync()
+    {
+        _parameters = new RealTimeMap.LoadParameters()
+        {
+            location = new RealTimeMap.Location()
+            {
+                latitude = MapLatitude,
+                longitude = MapLongitude
+            },
+            zoom_level = MapZoomFactor
+        };
+        _options = new RealTimeMap.MapOptions()
+        {
+            interaction_options = new RealTimeMap.InteractionOptions()
+            {
+                doubleClickZoom = false,
+                dragging = false,
+                trackResize = false,
+                shiftBoxZoom = false,
+            },
+            keyboard_navigation_options = new RealTimeMap.KeyboardNavigationOptions()
+            {
+                keyboard = false,
+            }
+        };  
+    
+        Console.WriteLine($"Map updated: [{MapLatitude}, {MapLongitude}] , factor {MapZoomFactor}");
+        return base.OnInitializedAsync();
+    }
+
+
+    private async Task UpdateMap(double lat, double lng)
+    {
+        MapLatitude = lat;
+        MapLongitude = lng;
+        var point = new RealTimeMap.StreamPoint()
+        {
+            latitude = MapLatitude,
+            longitude = MapLongitude,
+        };
+
+        if (!first)
+        {
+            await _map.Geometric.Points.add(point);
+            first = true;
+        }
+        else
+        {
+            await _map.Geometric.Points.moveTo(point);
+        }
+        Console.WriteLine($"Map updated: [{MapLatitude}, {MapLongitude}] , factor {MapZoomFactor}");
+    }
+
+}
+
+
+<div class="dossier_address-map_map">
+    <RealTimeMap
+        @ref="_map"
+        width="600px"
+        height="170px"
+        Parameters="@_parameters"
+        Options="@_options">
+    </RealTimeMap>
+
+    <button @onclick="async() => UpdateMap(50.8173674, 5.1770462)">Move</button>
+    <button @onclick="async() => UpdateMap(50.7513989, 5.3025615)">Move</button>
+</div>
