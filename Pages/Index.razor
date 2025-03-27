@@ -9,7 +9,7 @@ Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
-
+<p>With OK button</p>
 <RadzenDatePicker TValue="DateTime?"
                   @bind-Value="@Value"
                   ShowTime="true"
@@ -18,7 +18,21 @@ Welcome to your new app.
                   Change="@OnChangeInner"
                   ReadOnly="false"
                   Style="width:100%" 
-                  AllowClear="true"/>
+                  AllowClear="true"
+                  ShowTimeOkButton="true" />
+
+
+<p>Without OK button</p>
+<RadzenDatePicker TValue="DateTime?"
+                  @bind-Value="@Value2"
+                  ShowTime="true"
+                  TimeOnly="true"
+                  DateFormat="HH:mm"
+                  Change="@OnChangeInner2"
+                  ReadOnly="false"
+                  Style="width:100%" 
+                  AllowClear="true"
+                  ShowTimeOkButton="false" />
 
 @* <RadzenDropDown *@
 @*     TValue="int?" *@
