@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Radzen.Blazor
 
 <PageTitle>Index</PageTitle>
 
@@ -7,4 +8,29 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+
+<RadzenDatePicker TValue="DateTime?"
+                  @bind-Value="@Value"
+                  ShowTime="true"
+                  TimeOnly="true"
+                  DateFormat="HH:mm"
+                  Change="@OnChangeInner"
+                  ReadOnly="false"
+                  Style="width:100%" 
+                  AllowClear="true"/>
+
+@* <RadzenDropDown *@
+@*     TValue="int?" *@
+@*     @bind-Value="@selectedItem" *@
+@*     AllowClear="true" *@
+@*     AllowFiltering="true" *@
+@*     Multiple="false" *@
+@*     Data="@items" *@
+@*     TextProperty="Key" *@
+@*     ValueProperty="Value" *@
+@*     Change="Callback" *@
+@* > *@
+@* </RadzenDropDown> *@
+
 
