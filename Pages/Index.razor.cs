@@ -36,6 +36,7 @@ public partial class Index
     int? selectedItem;
     public DateTime? Value { get; set; }
     public DateTime? Value2 { get; set; }
+    public DateTime? Value3 { get; set; }
 
     private void Callback(object obj)
     {
@@ -51,6 +52,12 @@ public partial class Index
     private void OnChangeInner2(DateTime? obj)
     {
         Value2 = obj;
+        Console.WriteLine(obj);
+    }
+    
+    private void OnChangeInner3(DateTime? obj)
+    {
+        Value3 = obj;
         Console.WriteLine(obj);
     }
 }

@@ -22,6 +22,7 @@ Welcome to your new app.
                   ShowTimeOkButton="true" />
 
 
+
 <p>Without OK button</p>
 <RadzenDatePicker TValue="DateTime?"
                   @bind-Value="@Value2"
@@ -33,6 +34,19 @@ Welcome to your new app.
                   Style="width:100%" 
                   AllowClear="true"
                   ShowTimeOkButton="false" />
+
+
+<p>With OK button and one way binding</p>
+<RadzenDatePicker TValue="DateTime?"
+                  Value="@Value3"
+                  ShowTime="true"
+                  TimeOnly="true"
+                  DateFormat="HH:mm"
+                  Change="@OnChangeInner3"
+                  ReadOnly="false"
+                  Style="width:100%" 
+                  AllowClear="true"
+                  ShowTimeOkButton="true" />
 
 @* <RadzenDropDown *@
 @*     TValue="int?" *@
